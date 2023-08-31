@@ -2,7 +2,48 @@
 
 {% block body %}
 
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        
+        {% for i in product %}
 
+        <div class="col-md-6 col-lg-4 col-xl-4">
+          <div class="card product-card text-black">
+            <i class="fab fa-apple fa-lg pt-1 pb-1 px-1"></i>
+            <a href="/detay/{{i.id}}/">
+                <img src="{{i.productImg.url}}"
+                  class="card-img-top" alt="Apple Computer" />
+            </a>
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-title">{{i.productTitle}}</h5>
+              </div>
+              <div>
+                <div class="d-flex justify-content-between">
+                  <span>Marka</span><span style="color:green">{{i.productBrand}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Stok Durumu</span><span style="color:green">{{i.productStock}} adet stok</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Depolama</span><span>{{i.productStorage}} GB</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Ürün rengi</span><span>{{i.productColor}}</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                <button class="btn btn-primary p-2">Sepete Ekle</button>
+                <span style="font-weight: bold; font-size:1.5rem">{{i.productPrice}} TL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+  </section>
 
   
 {% endblock body %}
