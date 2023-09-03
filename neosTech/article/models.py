@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -33,3 +34,11 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.productTitle
     
+class Comment (models.Model):
+    user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
+    commentText = models.TextField(("Yorum"))
+    productComment = models.ForeignKey(Product, verbose_name=("Ürün"), on_delete=models.CASCADE,null=True,blank=True)
+    commentTime = models.DateTimeField((""), auto_now=False, auto_now_add=True,null=True,blank=True)
+    
+    def __str__(self) -> str:
+        return self.commentText

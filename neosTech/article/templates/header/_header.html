@@ -13,13 +13,13 @@
           </li>
          
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Markalar
             </a>
             <ul class="dropdown-menu">
               
               {% for i in brand  %}
-              <li><a class="dropdown-item" href="#">{{i.title}}</a></li>                
+              <li><a class="dropdown-item" href="/marka/{{i.id}}/">{{i.title}}</a></li>                
               {% endfor %}
                 
             </ul>
@@ -32,6 +32,8 @@
           <input class="form-control me-2" type="search" placeholder="Ne aramak istemiştin" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Ara</button>
         </form>
+        <a href="" class="ms-5 btn btn-register ">Kayıt ol</a>
+        <a href="" class="ms-3 btn btn-login ">Giriş yap</a>
       </div>
     </div>
   </nav>
