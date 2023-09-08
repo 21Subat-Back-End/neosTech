@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -10,6 +12,14 @@ def index(request):
     product= Product.objects.all()
     brand= Brand.objects.all()
     
+    query= request.GET.get('q')
+    if query:
+        product=product.filter(
+            Q(productTitle__icontains=query)|
+            Q(productDesct__icontains=query)|
+            Q(productBrand__title__icontains=query)|
+            Q(productColor__title__icontains=query)
+        ).distinct
     
     context = {
         'product':product,
@@ -117,3 +127,25 @@ def logoutt (request):
     logout(request)
     
     return redirect('anasayfa')
+
+
+def urunekle(request, id):
+    product= Product.objects.get(id=id)
+    user =request.user
+    sepet = Sepet.objects.create(product=product,user=user,adet=1,allprice=product.productPrice)
+    sepet.save()
+    return redirect('sepet')
+
+def sepet(request):
+    sepet =Sepet.objects.filter(user=request.user)
+    toplam=0
+    
+    for item in sepet:
+        toplam+=item.product.productPrice * item.adet
+    
+    context = {
+        'sepet':sepet,
+        'toplam':toplam
+    }
+    
+    return render(request,'shopping.html',context)

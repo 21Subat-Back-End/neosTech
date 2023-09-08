@@ -17,6 +17,7 @@ class ProductStorage(models.Model):
     
 class ProductColor(models.Model):
     title = models.CharField(("Ürün Rengi"), max_length=50)
+    colorCode = models.CharField(("ürün kodu"), max_length=50,null=True,blank=True)
 
     def __str__(self) -> str:
         return self.title
@@ -42,3 +43,14 @@ class Comment (models.Model):
     
     def __str__(self) -> str:
         return self.commentText
+    
+
+class Sepet (models.Model):
+    product=models.ForeignKey(Product, verbose_name=("ürün"),on_delete=models.CASCADE)
+    
+    user = models.ForeignKey(User, verbose_name=("kullanıcı"),on_delete=models.CASCADE)
+    
+    adet = models.PositiveIntegerField(("adet"))
+    
+    allprice = models.FloatField(("Toplam Fiyat"))
+    
