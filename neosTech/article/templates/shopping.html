@@ -35,8 +35,10 @@
                 <div class="col-md-2 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Adet</p>
-                    <form action="">
-                        <input type="number" min="1" max="10">
+                    <form action="{% url 'urungüncelle' item.id %}" method="POST">
+                      {% csrf_token %}
+                        <input type="number" min="1" max="10" name="quantity">
+                        <button type="submit">Güncelle</button>
                     </form>
                   </div>
                 </div>
@@ -49,11 +51,21 @@
                 <div class="col-md-2 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Toplam Tutar</p>
-                    <p class="lead fw-normal mb-0">{{item.allprice}}</p>
+                    <div class="d-flex">
+                      <p class="lead fw-normal mb-0">{{item.allprice}}</p>
+                      <div class="d-flex ms-5 align-items-center">
+                        <form action="{% url 'urunsil' item.id %}" method="POST">
+                          {% csrf_token %}
+                          <button class="btn" type="submit">
+                            <i class="fa-solid fa-trash fa-xl" style="color: #ff0000;"></i>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-  
+              
             </div>
           </div>
           {% endfor %}

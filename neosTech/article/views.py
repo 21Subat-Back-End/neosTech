@@ -11,7 +11,7 @@ def index(request):
     
     product= Product.objects.all()
     brand= Brand.objects.all()
-    
+
     query= request.GET.get('q')
     if query:
         product=product.filter(
@@ -23,7 +23,7 @@ def index(request):
     
     context = {
         'product':product,
-        'brand':brand
+        'brand':brand,
     }
     return render(request,'index.html',context)
 
@@ -135,6 +135,23 @@ def urunekle(request, id):
     sepet = Sepet.objects.create(product=product,user=user,adet=1,allprice=product.productPrice)
     sepet.save()
     return redirect('sepet')
+
+def urunsil(request, id):
+    
+    if request.method =='POST':
+        sepet_item = Sepet.objects.get(id=id)
+        sepet_item.delete()
+    
+    return redirect ('sepet')
+
+def urunGüncelle (request, id):
+    if request.method=='POST':
+        sepet_item =Sepet.objects.get(id=id)
+        quantity = int(request.POST.get('quantity',1))
+        sepet_item.adet=quantity
+        sepet_item.allprice=sepet_item.product.productPrice *quantity
+        sepet_item.save()
+        return redirect(sepet)
 
 def sepet(request):
     sepet =Sepet.objects.filter(user=request.user)

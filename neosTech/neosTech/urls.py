@@ -29,6 +29,8 @@ urlpatterns = [
     path('kayıtol/',register,name='kayıtol'),
     path('cıkıs/',logoutt,name='cıkıs'),
     path ('sepet/', sepet ,name='sepet'),
-    path('urunekle/<id>/',urunekle,name="urunekle")
+    path('urunekle/<id>/',urunekle,name="urunekle"),
+    path('urunsil/<id>/',urunsil,name="urunsil"),
+    path('urunguncelle/<id>/',urunGüncelle,name="urungüncelle")
     
 ] +static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
